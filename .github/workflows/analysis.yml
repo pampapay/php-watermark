@@ -17,7 +17,7 @@ jobs:
       fail-fast: true
       matrix:
         operating-system: [ ubuntu-latest ]
-        php: [ '8.0', '8.1', '8.2' ]
+        php: [ '8.1', '8.2' ]
         dependencies: [ 'lowest', 'highest' ]
         include:
           - php: '8.2'
