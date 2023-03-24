@@ -1,0 +1,35 @@
+{
+    "name": "pampapay/php-watermark",
+    "description": "Simple library to add a watermark to an image",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Pampapay\\PhpWatermark\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pampapay\\PhpWatermark\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Javier Trejo",
+            "email": "trejo.javier@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "8.*",
+        "ext-imagick": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    },
+    "scripts": {
+        "test": [
+            "phpunit"
+        ]
+    }
+}

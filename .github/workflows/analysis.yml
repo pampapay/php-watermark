@@ -1,0 +1,57 @@
+name: build
+
+permissions: write-all
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      fail-fast: true
+      matrix:
+        operating-system: [ ubuntu-latest ]
+        php: [ '8.0', '8.1', '8.2' ]
+        dependencies: [ 'lowest', 'highest' ]
+        include:
+          - php: '8.2'
+            composer-options: "--ignore-platform-req=php+"
+
+    name: PHP ${{ matrix.php }} on ${{ matrix.operating-system }} with ${{ matrix.dependencies }} dependencies
+
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout repository
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: pcov
+
+      - name: Composer install
+        uses: ramsey/composer-install@v2
+        with:
+          dependency-versions: ${{ matrix.dependencies }}
+          composer-options: "${{ matrix.composer-options }}"
+
+      - name: PHPUnit Tests
+        run: vendor/bin/phpunit --configuration phpunit.xml.dist --coverage-text
+
+      - name: PHPUnit Legacy Tests
+        run: vendor/bin/phpunit --configuration phpunit.xml.dist --coverage-text
+        env:
+          PHPUNIT_ANALYSER: 'legacy'
+
+      - name: Make code coverage badge
+        uses: timkrase/phpunit-coverage-badge@v1.2.1
+        with:
+          coverage_badge_path: output/coverage.svg
+          push_badge: true
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
