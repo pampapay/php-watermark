@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1679690118">
-  <project timestamp="1679690118">
+<coverage generated="1679778417">
+  <project timestamp="1679778417">
     <file name="/home/runner/work/php-watermark/php-watermark/src/Exception/FileNotFoundException.php">
       <class name="Pampapay\PhpWatermark\Exception\FileNotFoundException" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
