@@ -35,7 +35,7 @@ class Image
     public function addTextWatermark(string $text, float $fontSize = null): self
     {
         if(is_null($fontSize)) {
-            $fontSize = $this->data->getImageResolution()['y'];
+            $fontSize = ($this->data->getImageWidth() + $this->data->getImageHeight()) / 3 / strlen($text);
         }
 
         $watermark = new Watermark($text, $fontSize);
