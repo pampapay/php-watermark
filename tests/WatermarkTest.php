@@ -16,7 +16,7 @@ class WatermarkTest extends TestCase
     {
         foreach (new DirectoryIterator(self::$outputDir) as $fileInfo) {
             if(!$fileInfo->isDot() && '.gitignore' !== $fileInfo->getBasename()) {
-                unlink($fileInfo->getPathname());
+                 unlink($fileInfo->getPathname());
             }
         }
     }
@@ -91,6 +91,21 @@ class WatermarkTest extends TestCase
     {
         $imagesDir = realpath(sprintf('%s/images/', __DIR__));
         $filename = '/pexels-pixabay-87009.jpg';
+        $image = new Image($filename, $imagesDir);
+
+        $image
+            ->addTextWatermark('White sample text')
+            ->saveCopy($filename, self::$outputDir);
+
+        $this->assertFileExists(
+            sprintf('%s/%s', self::$outputDir, $filename)
+        );
+    }
+
+    public function test_create_a_new_image_with_dynamic_font_size_on_small_image(): void
+    {
+        $imagesDir = realpath(sprintf('%s/images/', __DIR__));
+        $filename = '/beach-1361907.jpg';
         $image = new Image($filename, $imagesDir);
 
         $image
